@@ -436,6 +436,7 @@ TOOL_VERSIONS = {
         "url": "20250317/cpython-{python_version}+20250317-{platform}-{build}.tar.gz",
         "sha256": {
             "aarch64-apple-darwin": "19b147c7e4b742656da4cb6ba35bc3ea2f15aa5f4d1bbbc38d09e2e85551e927",
+            "aarch64-pc-windows-msvc": "1cf5760eea0a9df3308ca2c4111b5cc18fd638b2a912dbe07606193e3f9aa123",
             "aarch64-unknown-linux-gnu": "7d52b5206afe617de2899af477f5a1d275ecbce80fb8300301b254ebf1da5a90",
             "ppc64le-unknown-linux-gnu": "17c049f70ce719adc89dd0ae26f4e6a28f6aaedc63c2efef6bbb9c112ea4d692",
             "riscv64-unknown-linux-gnu": "83ed50713409576756f5708e8f0549a15c17071bea22b71f15e11a7084f09481",
@@ -693,6 +694,16 @@ def _generate_platforms():
             ],
             flag_values = {},
             os_name = MACOS_NAME,
+            # Matches the value in @platforms//cpu package
+            arch = "aarch64",
+        ),
+        "aarch64-pc-windows-msvc": struct(
+            compatible_with = [
+                "@platforms//os:windows",
+                "@platforms//cpu:aarch64",
+            ],
+            flag_values = {},
+            os_name = WINDOWS_NAME,
             # Matches the value in @platforms//cpu package
             arch = "aarch64",
         ),

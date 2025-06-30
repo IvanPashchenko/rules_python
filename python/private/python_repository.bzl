@@ -72,6 +72,12 @@ def _python_repository_impl(rctx):
     urls = rctx.attr.urls or [rctx.attr.url]
     auth = get_auth(rctx, urls)
 
+    # there's no aarch64 releases, we'll run x64 ones under emulation
+    fixed_urls = []
+    for url in urls:
+        fixed_urls.append(url.replace("aarch64-pc-windows-msvc", "x86_64-pc-windows-msvc"))
+    urls = fixed_urls
+
     if INSTALL_ONLY in release_filename:
         rctx.download_and_extract(
             url = urls,
